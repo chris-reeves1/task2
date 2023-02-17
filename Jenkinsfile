@@ -14,10 +14,15 @@ pipeline {
             }
         }
 
-        stage('push') {
-            steps {
-                sh 'ls' 
-            }
+        stage('Push') {      	
+            steps{                       	
+	            sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"                		
+	            echo 'Login Completed'
+                sh "docker tag trio-task-mysql chrisreeves1/mytriotasksql:latest"
+                sh "docker tag trio-task-flask-app chrisreeves1/mytriotaskflaskapp:latest"
+                sh "docker push chrisreeves1/mytriotasksql:latest"
+                sh "docker push chrisreeves1/mytriotaskflaskapp:latest"
+            }           
         }
     }
 }
