@@ -25,7 +25,7 @@ pipeline {
                     appImage.run("-d -e MYSQL_ROOT_PASSWORD=password --name flask-app --network trio-task-network")
                     
                     // Use standard Nginx image and bind mount for custom configuration
-                    docker.image('nginx:latest').run("-d --name nginx -p 80:80 --network trio-task-network -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf")
+                    docker.image('nginx:latest').run("-d --name nginx -p 80:80 --network trio-task-network -v \$(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf")
                 }
             }
         }
