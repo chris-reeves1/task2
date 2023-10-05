@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        registryCredential = credentials('dockerhub')
     }
     stages {
         stage('Init') {
@@ -32,14 +32,14 @@ pipeline {
         stage('Push Images to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub') {
-                        def appImage = docker.image("trio-task-flask-app-dev-work:latest")
-                        def dbImage = docker.image("trio-task-mysql-dev-work:5.7")
+                    docker.withRegistry('', 'registryCredential') {
+                        //def appImage = docker.image("trio-task-flask-app-dev-work:latest")
+                        //def dbImage = docker.image("trio-task-mysql-dev-work:5.7")
                         
 
                         // Pushing images
-                        appImage.push("latest")
-                        dbImage.push("5.7")
+                        dockerImage.push("latest")
+                        dockerImage.push("5.7")
                     }
                 }
             }
