@@ -38,8 +38,8 @@ pipeline {
                         
 
                         // Pushing images
-                        appImage.push("mytriotaskflaskapp-dev-work")
-                        dbImage.push("mytriotasksql-dev-work")
+                        appImage.push("latest")
+                        dbImage.push("5.7")
                     }
                 }
             }
