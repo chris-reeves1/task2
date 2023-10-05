@@ -17,8 +17,8 @@ pipeline {
             steps {
                 script {
                     // Build the custom images
-                    def dbImage = docker.build("trio-task-mysql:5.7", "db")
-                    def appImage = docker.build("trio-task-flask-app:latest", "flask-app")
+                    def dbImage = docker.build("trio-task-mysql-dev-work:5.7", "db")
+                    def appImage = docker.build("trio-task-flask-app-dev-work:latest", "flask-app")
                     
                     // Run containers
                     dbImage.run("-d --name mysql --network trio-task-network -v new-volume:/var/lib/mysql")
@@ -33,16 +33,13 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub') {
-                        def appImage = docker.image("trio-task-flask-app:latest")
-                        def dbImage = docker.image("trio-task-mysql:5.7")
+                        def appImage = docker.image("trio-task-flask-app-dev-work:latest")
+                        def dbImage = docker.image("trio-task-mysql-dev-work:5.7")
                         
-                         // Tagging images
-                    appImage.tag("chrisreeves1/mytriotaskflaskapp-dev-work")
-                    dbImage.tag("chrisreeves1/mytriotasksql-dev-work")
 
-                    // Pushing images
-                    appImage.push("mytriotaskflaskapp-dev-work")
-                    dbImage.push("mytriotasksql-dev-work")
+                        // Pushing images
+                        appImage.push("mytriotaskflaskapp-dev-work")
+                        dbImage.push("mytriotasksql-dev-work")
                     }
                 }
             }
