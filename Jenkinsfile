@@ -32,7 +32,7 @@ pipeline {
         stage('Push Images to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                    docker.withRegistry('', 'dockerhub') {
                         def appImage = docker.image("trio-task-flask-app:latest")
                         def dbImage = docker.image("trio-task-mysql:5.7")
                         
