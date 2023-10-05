@@ -12,7 +12,7 @@ pipeline {
         registryApp = "${dockerUserName}/${imageNameApp}"
         registryDb = "${dockerUserName}/${imageNameDb}"
         
-        registryCredential = 'dockerhub'
+        registryCredentials = 'dockerhub'
     }
     stages {
         stage('Init') {
