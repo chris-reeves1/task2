@@ -36,8 +36,8 @@ pipeline {
                         def appImage = docker.image("trio-task-flask-app:latest")
                         def dbImage = docker.image("trio-task-mysql:5.7")
                         
-                        appImage.push("mytriotaskflaskapp-dev-work")
-                        dbImage.push("mytriotasksql-dev-work")
+                        appImage.push("chrisreeves1/mytriotaskflaskapp-dev-work")
+                        dbImage.push("chrisreeves1/mytriotasksql-dev-work")
                     }
                 }
             }
