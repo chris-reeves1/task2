@@ -5,8 +5,8 @@ pipeline {
         dockerUserName="chrisreeves1"
         
         // Names of your Docker images
-        imageNameApp = "trio-task-flask-app"
-        imageNameDb = "trio-task-mysql"
+        imageNameApp = "trio-task-flask-app-dev-work"
+        imageNameDb = "trio-task-mysql-dev-work"
         
         // Constructed registry paths
         registryApp = "${dockerUserName}/${imageNameApp}"
@@ -28,8 +28,11 @@ pipeline {
             steps {
                 script {
                     // Build the custom images
-                    def dbImage = docker.build("trio-task-mysql-dev-work:5.7", "db")
-                    def appImage = docker.build("trio-task-flask-app-dev-work:latest", "flask-app")
+                    //def dbImage = docker.build("trio-task-mysql-dev-work:5.7", "db")
+                    //def appImage = docker.build("trio-task-flask-app-dev-work:latest", "flask-app")
+
+                    appImage = docker.build("${registryApp}:${env.BUILD_NUMBER}", "flask-app")
+                    dbImage = docker.build("${registryDb}:${env.BUILD_NUMBER}", "db")
                     
                     // Run containers
                     dbImage.run("-d --name mysql --network trio-task-network -v new-volume:/var/lib/mysql")
