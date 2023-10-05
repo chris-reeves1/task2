@@ -33,8 +33,11 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                        docker.image('trio-task-mysql-dev-work:5.7').push("5.7")
-                        docker.image('trio-task-flask-app-dev-work:latest').push("latest")
+                        def appImage = docker.image("trio-task-flask-app:latest")
+                        def dbImage = docker.image("trio-task-mysql:5.7")
+                        
+                        appImage.push("mytriotaskflaskapp-dev-work")
+                        dbImage.push("mytriotasksql-dev-work")
                     }
                 }
             }
