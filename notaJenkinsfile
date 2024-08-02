@@ -16,7 +16,7 @@ pipeline {
                 sh './deploy.sh'
             }
         }
-
+/*
         stage('Push') {      	
             steps{                       	
 	            sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"                		
@@ -27,5 +27,6 @@ pipeline {
                 sh "docker push chrisreeves1/mytriotaskflaskapp:latest"
             }           
         }
+*/
     }
 }
